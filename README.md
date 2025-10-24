@@ -1,66 +1,57 @@
-## Foundry
+## How does the Team contact me and sends me their code base for security review?
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+1. They actually verify their code on etherscan and sends us the link for security review:
 
-Foundry consists of:
+CodeV1: 💻 Security Review - https://sepolia.etherscan.io/address/0x2ecf6ad327776bf966893c96efb24c9747f6694b
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+**1->** This is unacceptable to make a security review of a code base that is exclusively on etherscan and it should be made clear.
 
-## Documentation
+**2->** Its clear we are looking for as much bugs as possible, but we are looking also to code maturity; if there is no test suite, no deployment suite or others, how much sure is the code base?
 
-https://book.getfoundry.sh/
+**3->** My job as a security reviewer is to make sure the team/ protocol lives more educated on how to make their codebase more secure; I have to make sure that they are armed with knowledge to be as save as possible
 
-## Usage
+**4->** Remember security is a culture not a one time thing; do your best to make them better and even if it is for writing better test.
 
-### Build
+## Before starting an Audit we should check the Audit readiness of the protocol/Team
 
-```shell
-$ forge build
-```
+Do they have:
 
-### Test
+### Simple security checklist:
 
-```shell
-$ forge test
-```
+1.  Tests suite with code coverage?
+2.  Fuzzing, static analysis
+3.  NatSpec especially for external/public function
 
-### Format
+### The rekt test: [>-Link-<](https://blog.trailofbits.com/2023/08/14/can-you-pass-the-rekt-test/)
 
-```shell
-$ forge fmt
-```
+1.  Do you have all actors, roles, and privileges documented?
+2.  Do you keep documentation of all the external services, contracts, and oracles you rely on?
+3.  Do you have a written and tested incident response plan?
+4.  Do you document the best ways to attack your system?
+5.  Do you perform identity verification and background checks on all employees?
+6.  Do you have a team member with security defined in their role?
+7.  Do you require hardware security keys for production systems?
+8.  Does your key management system require multiple humans and physical steps?
+9.  Do you define key invariants for your system and test them on every commit?
+10. Do you use the best automated tools to discover security issues in your code?
+11. Do you undergo external audits and maintain a vulnerability disclosure or bug bounty program?
+12. Have you considered and mitigated avenues for abusing users of your system?
 
-### Gas Snapshots
+Code maturity is important
 
-```shell
-$ forge snapshot
-```
+### This code base(etherscan does not pass the rekt test) so we do not go for any security review with the protocol/Team
 
-### Anvil
+2. Since they don't pass the rekt test and we denied to review the code, they send us a second version of the code:
 
-```shell
-$ anvil
-```
+CodeV2: 💻 Security Review - https://github.com/Cyfrin/3-passwordstore-audit
 
-### Deploy
+We now have a much better version here, structure project with the actual codebase, we've got a script for how they actually deploy everything, with a readme though it looks like a basic foundry project(Not quietly what we want here), we can seems to find any test folder, not only tests not present we are not event sure of what we want to audit, did they change the thinks in lib folder? ..
+so before beginning anything we should make sure we "scoped" it, ask question on what exactly should be audited, you can reffered to:
+[>-minimal-onboarding-questions.md-<](minimal-onboarding-questions.md)
+We are going to send them this minimal onboarding questions and wait for the response, we need the documentaion and more context.
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+1. They contact us back with a new codebase:
+   CodeV3: 💻 Security Review - https://github.com/Cyfrin/3-passwordstore-audit/tree/onboarded
 
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+They have filled and send us back the minimal-onboarding-questions form:
+[>-minimal-onboarding-filled.md-<](minimal-onboarding-filled.md)
